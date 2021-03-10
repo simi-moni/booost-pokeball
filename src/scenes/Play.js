@@ -18,7 +18,7 @@ export default class Play extends Scene {
     const button = new Button();
     this.addChild(button);
 
-    button.on('click', () => pokeball.emit(Pokeball.events.OPEN_START));
+    button.on('click', () => pokeball.open());
 
     pokeball.on(Pokeball.events.OPEN_START, () => button.hide());
     pokeball.on(Pokeball.events.CLOSE_END, () => button.show());
