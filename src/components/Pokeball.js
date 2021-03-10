@@ -18,7 +18,7 @@ export default class Pokeball extends Container {
         this.addChild(this.top);
         this.addChild(this.bottom);
 
-        this.on(Pokeball.events.OPEN_START, () => this.open());
+        //this.on(Pokeball.events.OPEN_START, () => this.open());
         this.on(Pokeball.events.OPEN_END, () => this.close());
     };
 
@@ -42,6 +42,8 @@ export default class Pokeball extends Container {
     }
 
     async open() {
+        this.emit(Pokeball.events.OPEN_START);
+
         const tlOpen = new gsap.timeline();
         await tlOpen.to(this.top, { y: -200, ease: 'bounce.out', }, 'open')//elastic or bounce
             .to(this.bottom, { y: 50, ease: 'bounce.out', }, 'open');
@@ -86,7 +88,7 @@ export default class Pokeball extends Container {
         const dummy = { value: 0 };
         const steps = gsap.to(dummy, {
             duration: 1,
-            ease: 'steps(100)',
+            ease: "steps(100)",
             value: 100,
             paused: true,
             onUpdate: () => {
@@ -95,6 +97,6 @@ export default class Pokeball extends Container {
             },
         });
 
-        await gsap.to(steps, { duration: 5, progress: 1, ease: 'circ.out' });
+        await gsap.to(steps, { duration: 5, progress: 1, ease: "circ.out" });
     }
 }
